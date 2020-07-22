@@ -20,11 +20,13 @@ const userSchema = new mongoose.Schema({
     position: {
         type: String,
         required: true,
-        max: 255
+        max: 255,
+        default: "Сотрудник"
     },
     access: {
         type: Number,
-        required: true
+        required: true,
+        default: 3
     }
 })
 
