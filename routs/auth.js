@@ -60,12 +60,13 @@ router.get('/users/heads', async (req, res) => {
 //update an user
 router.patch('/users/:userID', async (req,res) => {
     try{
+        const oldUser = await User.findById(req.params.userID);
         const updatedUser = await User.updateOne({_id: req.params.userID}, {$set: {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            position: req.body.position,
-            access: req.body.access
+            name: req.body.name || oldUser.name,
+            email: req.body.email || oldUser.email,
+            password: req.body.password || oldUser.password,
+            position: req.body.position || oldUser.position,
+            access: req.body.access || oldUser.access
         }});
         res.json(updatedUser);
     }catch(err){

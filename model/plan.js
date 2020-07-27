@@ -41,10 +41,12 @@ const planSchema = new mongoose.Schema({
         max: 255
     },
     results: {
-        type: String
+        type: String,
+        default: "Нет результата"
     },
     mark: {
-        type: String
+        type: String,
+        default: "Не оценено"
     },
     tasks_arr: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }]
 })
