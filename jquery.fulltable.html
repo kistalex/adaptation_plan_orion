@@ -1,0 +1,159 @@
+<html>
+<head>
+    <title>План адаптации</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery.fulltable.js"></script>
+    <link rel="stylesheet" href="jquery.fulltable.css"/>
+
+    <style type="text/css">
+        table {
+            position:relative;
+            width:525px;
+            /*margin:4px 0;*/
+            margin:auto;
+            border-collapse: collapse;
+
+            font-family: tahoma, arial, helvetica !important;
+            font-size: 9pt !important;
+        }
+        table, table th, table td {
+            border: 1px solid black;
+        }
+        table th, table td  {
+            padding:0 2em;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            line-height:22px;
+            height:22px;
+        }
+        a.button {
+            position: relative;
+            display: inline-block;
+
+            font-family: tahoma, arial, helvetica;
+            font-size: 9pt;
+            font-weight: bold;
+
+            color: #ffffff;
+            background-color: #AAAAAA;
+
+            padding: 5px;
+
+            text-decoration: none;
+
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(
+            function() {
+                $("#test-table").FullTable({
+                    "alwaysCreating":true,
+                    "selectable":true,
+                    "fields": {
+                        "task_result":{
+                            "options":[
+                                {
+                                    "title":"Выполнено",
+                                    "value":"Выполнено"
+                                },
+                                {
+                                    "title":"Не выполнено",
+                                    "value":"Не выполнено"
+                                }
+                            ],
+                            "mandatory":false,
+                            "placeholder":"Select one",
+                            "errors":{
+                                "mandatory":"It is mandatory"
+                            }
+                        },
+                        "task_name":{
+                            "mandatory":true,
+                            "errors":{
+                                "mandatory":"It is mandatory"
+                            }
+                        },
+                        "task_description":{
+                            "mandatory":true,
+                            "errors":{
+                                "mandatory":"It is mandatory"
+                            }
+                        },
+                        "date":{
+                            "type":"date",
+                            "mandatory":false,
+                            "validator":function(today) {
+
+                               //return true;
+                                //document.write(Date());
+                                let now = new Date().toLocaleDateString();
+                                document.write(now);
+
+                            },
+
+                            "errors":{
+                                //"type":"must be a number",
+                                //"mandatory":"is mandatory",
+                                //"validator":"cannot be negative"
+                            }
+                        },
+                        "task_start":{
+                            "mandatory":false,
+                            "placeholder":"гггг-мм-дд",
+                            "errors":{
+                               // "type":"must be a text",
+                                //"mandatory":"is mandatory"
+                            }
+                        },
+                        "task_end":{
+                            "mandatory":false,
+                            "placeholder":"гггг-мм-дд",
+                        }
+
+                    }
+                });
+                $("#test-table-add-row").click(function() {
+                    $("#test-table").FullTable("addRow");
+                });
+                $("#test-table-get-value").click(function() {
+                    console.log($("#test-table").FullTable("getData"));
+                });
+                $("#test-table").FullTable("on", "error", function(errors) {
+                    for (let error in errors) {
+                        error = errors[error];
+                        console.log(error);
+                    }
+                });
+                $("#test-table").FullTable("draw");
+            }
+        );
+    </script>
+</head>
+<body>
+<!--<a href="#" class="button" id="test-table-add-row">+ Add row</a>-->
+<table class="fulltable fulltable-editable" id="test-table">
+    <thead>
+    <tr>
+        <th fulltable-field-name="task_name">Задача</th>
+        <th fulltable-field-name="task_description">Описание задачи</th>
+        <th fulltable-field-name="date">Дата создания плана</th>
+        <th fulltable-field-name="task_start">Срок старта</th>
+        <th fulltable-field-name="task_end">Срок окончания</th>
+        <th fulltable-field-name="task_result">Выполнение</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--<tr><td><span>Купить ручку</span></td><td><span>Сходить в магазин</span></td><td><span>23.01.12</span></td><td><span>23.01.12-25.01.12</span></td><td><span>Выполнено</span></td></tr>-->
+    </tbody>
+
+</table>
+<!-- <a href="#" class="button" id="test-table-get-value">> Get value</a>-->
+</body>
+</html>
