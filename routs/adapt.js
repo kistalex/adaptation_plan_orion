@@ -82,7 +82,7 @@ router.get('/:userId', async (req,res) => {
 });
 
 //task creation by plan id
-router.post('/tasks/:planID', async (req,res) => {
+router.post('/:planID/tasks', async (req,res) => {
    const plan = await Plan.findById(req.params.planID);
     if (plan){ 
         const tasks_arr = new Task({
