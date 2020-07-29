@@ -9,6 +9,7 @@ const taskSchema = new mongoose.Schema({
     },
     task_name:{
         type: String,
+        required: true
     },
     task_creation: {
         type: Date,
@@ -16,12 +17,16 @@ const taskSchema = new mongoose.Schema({
     },
     task_description: {
         type: String,
+        required: true,
         min: 10
     },
-    task_period: {
-        type: String,
-        min: 4,
-        max: 255
+    task_start: {
+        type: Date,
+        default: Date.now
+    },
+    task_end:{
+        type: Date,
+        required: true
     },
     task_result:{
         type: String,

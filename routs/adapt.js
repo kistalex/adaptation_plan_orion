@@ -89,7 +89,8 @@ router.post('/:planID/tasks', async (req,res) => {
             plan : plan._id,
             task_name: req.body.task_name,
             task_description: req.body.task_description,
-            task_period: req.body.task_period
+            task_start: req.body.task_start,
+            task_end: req.body.task_end
         }) 
         try{
             const savedTask = await tasks_arr.save();
