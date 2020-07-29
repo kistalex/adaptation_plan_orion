@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+
 const planSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -39,36 +41,14 @@ const planSchema = new mongoose.Schema({
         max: 255
     },
     results: {
-        type: String
+        type: String,
+        default: "Нет результата"
     },
     mark: {
-        type: String
+        type: String,
+        default: "Не оценено"
     },
-    tasks_arr: {
-        task_name:{
-            type: String,
-            required: true
-        },
-        task_creation: {
-            type: Date,
-            default: Date.now
-        },
-        task_description: {
-            type: String,
-            required: true,
-            min: 10
-        },
-        task_period: {
-            type: String,
-            required: true,
-            min: 4,
-            max: 255
-        },
-        task_rasult:{
-            type: String
-        }
-
-    }
+    tasks_arr: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }]
 })
 
 module.exports = mongoose.model('plan', planSchema);
