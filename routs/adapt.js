@@ -56,6 +56,31 @@ router.patch('/:planId', async (req,res) => {
     }
 });
 
+// list of plans by role 
+router.get('/:userId', async (req,res) => {
+    try{
+        const user = await User.findById(req.params.userId);
+        if (!user){
+            return res.status('400').send('Сотрудник не найден')
+        }else{
+            if(user.access === 1){
+                     allPlans = await Plan.find({});
+            }else{
+                if(user.access === 2){
+                     allPlans = await Plan.find({head: user.name});
+                }else{
+                     allPlans = await Plan.find({name: user.name});
+                }
+            }
+            if(allPlans == false) return res.status('400').send('План не найден');
+            res.json(allPlans); 
+        };
+
+    }catch(err){
+        res.status('400').send(err);
+    }
+});
+
 //task creation by plan id
 router.post('/tasks/:planID', async (req,res) => {
    const plan = await Plan.findById(req.params.planID);
