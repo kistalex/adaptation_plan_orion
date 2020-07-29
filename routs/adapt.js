@@ -122,7 +122,8 @@ router.patch('/tasks/:taskId', async (req,res) => {
         await Task.updateOne({_id: req.params.taskId}, {$set: {
             task_name: req.body.task_name ||oldTask.task_name,
             task_description: req.body.task_description || oldTask.task_description,
-            task_period: req.body.task_period || oldTask.task_period,
+            task_start: req.body.task_start || oldTask.task_start,
+            task_end: req.body.task_end || oldTask.task_end,
             task_result: req.body.task_result || oldTask.task_result
         }});
         const updatedTask = await Task.findById(req.params.taskId);
